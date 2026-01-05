@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("INSERT INTO logindata (username, email, password) VALUES (?, ?, ?)");
             if ($stmt->execute([$username, $email, $hashed_pw])) {
                 $_SESSION['username'] = $username;
-                header("Location: ss.php");
+                header("Location: menu.php");
                 exit();
             } else {
                 $error = "Error creating account.";

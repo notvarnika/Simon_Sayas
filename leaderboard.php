@@ -1,31 +1,43 @@
 <?php
+session_start();
 include 'dbcon.php';
-
-$stmt = $pdo->query("SELECT username, score FROM leaderboard ORDER BY score DESC");
+$stmt = $pdo->prepare("SELECT username, score, timestamp 
+                       FROM leaderboard 
+                       WHERE game = 'simonsays'
+                       ORDER BY score DESC ");
+$stmt->execute();
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Leaderboard</title>
-  <link rel="stylesheet" href="leaderboard.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>SimonSays Leaderboard</title>
+  <link rel="stylesheet" href="gameoverfp.css">
 </head>
 <body>
-  <section>
+  <section style="min-height: 80vh; display: flex; align-items: center; justify-content: center;">
     <div class="login-box">
-      <h2>TOP SIMON SAY-ERS!!</h2>
-      <table>
-        <tr><th>Username</th><th>Score</th></tr>
-        <?php foreach ($rows as $row): ?>
+      <h1>Simon Says Leaderboard</h1>
+      <table style=" border-collapse: collapse; margin-top:20px;">
+        <tr style="background:#ccc;">
+          <th style="padding:10px; border:1px solid #999;">Rank</th>
+          <th style="padding:10px; border:1px solid #999;">Username</th>
+          <th style="padding:10px; border:1px solid #999;">Score</th>
+        </tr>
+        <?php 
+        $rank = 1;
+        foreach ($rows as $row): ?>
           <tr>
-            <td><?= htmlspecialchars($row['username']) ?></td>
-            <td><?= $row['score'] ?></td>
+            <td style="padding:10px; border:1px solid #999;"><?php echo $rank++; ?></td>
+            <td style="padding:10px; border:1px solid #999;"><?php echo htmlspecialchars($row['username']); ?></td>
+            <td style="padding:10px; border:1px solid #999;"><?php echo $row['score']; ?></td>
           </tr>
         <?php endforeach; ?>
       </table>
+      <a href="ss.php">Play Again</a>
+      <a href="menu.php">Back to Menu</a>
+      
     </div>
   </section>
 </body>

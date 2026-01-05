@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['username'] = $username;
-        header("Location: ss.php");
+        header("Location: menu.php");
         exit();
     } else {
         $error = "Invalid credentials. <a href='createaccount.php'>Create a new account</a>";

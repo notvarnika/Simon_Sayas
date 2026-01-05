@@ -16,7 +16,7 @@ $username = $_SESSION['username'] ?? null;
   <h2>Press any key to start the game</h2>
 
   <?php if ($username): ?>
-    <p>Welcome, <strong><?php echo htmlspecialchars($username); ?></strong>!</p>
+    <p>Goodluck <strong><?php echo htmlspecialchars($username); ?></strong>!</p>
   <?php else: ?>
     <p><a href="index.php">Login to save your score</a></p>
   <?php endif; ?>
@@ -31,7 +31,6 @@ $username = $_SESSION['username'] ?? null;
       <div class="btn purple" type="button" id="purple">4</div>
     </div>
   </div>
-
   <script src="simon.js"></script>
 </body>
 </html>
